@@ -1,12 +1,13 @@
 
 from datetime import datetime
 import aiopg
+import asyncio
 from gino import Gino
 from aiohttp import web
 from asyncpg import UniqueViolationError
 
 
-ADS_DSN = f"postgresql+asyncpg://drimtim:302911 @127.0.0.1:5432/db_new"
+ADS_DSN = f"postgresql://drimtim:302911 @127.0.0.1:5432/db_new"
 db = Gino()
 
 
@@ -54,6 +55,7 @@ async def register_pg_pool(app):
 
 async def register_db(app):
     await db.set_bind(ADS_DSN)
+    await db.gino.create_all()
     yield
     await db.pop_bind().close()
 
