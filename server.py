@@ -6,7 +6,7 @@ from aiohttp import web
 from asyncpg import UniqueViolationError
 
 
-ADS_DSN = "postgresql://drimtim:302911 @127.0.0.1:5432/db_new"
+ADS_DSN = f"postgresql+asyncpg://drimtim:302911 @127.0.0.1:5432/db_new"
 db = Gino()
 
 
@@ -52,7 +52,7 @@ async def register_pg_pool(app):
     print('APP FINISH')
 
 
-async def register_db(ADS_DSN):
+async def register_db(app):
     await db.set_bind(ADS_DSN)
     yield
     await db.pop_bind().close()
