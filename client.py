@@ -13,13 +13,6 @@ async def get_advertisements():
         async with session.get('http://127.0.0.1:7070/admodels') as resp:
             return await resp.text()
 
-
-async def get_advertisement():
-    async with ClientSession() as session:
-        async with session.get('http://127.0.0.1:7070/admodel/1') as resp:
-            return await resp.text()
-
-
 async def create_advertisement():
     async with ClientSession() as session:
         async with session.post('http://127.0.0.1:7070/admodel', json={
@@ -30,6 +23,14 @@ async def create_advertisement():
 
         }) as resp:
             return await resp.text()
+
+async def get_advertisement():
+    async with ClientSession() as session:
+        async with session.get('http://127.0.0.1:7070/admodel/1') as resp:
+            return await resp.text()
+
+
+
 
 
 async def delete_advertisement():
